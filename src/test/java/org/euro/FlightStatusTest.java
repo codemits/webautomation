@@ -39,7 +39,8 @@ public class FlightStatusTest extends TestBase {
     public void testFlightStatus() {
         flightStatus.checkFlightStatus("EDI", "BER", "18");
         String noFlightFoundMessage = "Unfortunately, we could not find any results for your search.";
-        Assert.assertTrue(flightStatus.getTextOfTheSearchedFlightStatus().equalsIgnoreCase(noFlightFoundMessage));
+        Assert.assertTrue(flightStatus.getTextOfTheSearchedFlightStatus().equalsIgnoreCase(noFlightFoundMessage),
+                "Searched Flight status is available");
     }
 
     @AfterMethod
