@@ -1,41 +1,35 @@
-name: Java Selenium Tests
+name: Java Code Review
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  test:
+  copilot-review:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Set up JDK 11
+    - name: Setup JDK
       uses: actions/setup-java@v2
       with:
         java-version: 11
 
-    - name: Install Chrome driver
-      run: |
-        LATEST_VERSION=$(curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-        curl -sSL https://chromedriver.storage.googleapis.com/$LATEST_VERSION/chromedriver_linux64.zip -o /tmp/chromedriver.zip
-        sudo unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
-        sudo chmod +x /usr/local/bin/chromedriver
+    - name: Setup Maven
+      uses: v1sion/setup-maven@v1
+      with:
+        maven-version: '3.8.1'
 
-    - name: Install dependencies
-      run: mvn -B clean dependency:resolve
-
-    - name: Run Copilot review
+    - name: Install GitHub Copilot
       uses: Open-At-Source/copilot-action@v1.0.0
       with:
         language: java
         token: ${{ secrets.GITHUB_TOKEN }}
-        ignore-patterns: |
-          **/target/**
-          **/build/**
 
-    - name: Run Selenium tests
-      run: mvn -B test -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
+    - name: Review Java code
+      run: |
+        git fetch origin pull/${{ github.event.pull_request.number }}/head:${{ github.event.pull_request.head.ref }}
+        git checkout ${{ github.event.pull_request.head.ref }}
+        git config --global user.email "bot@example.com"
+        git config --global user.name "GitHub Copilot"
+        copilot review --ignore-patterns "**/target/**,**/build/**"
