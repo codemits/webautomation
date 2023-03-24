@@ -1,0 +1,41 @@
+name: Java Selenium Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
+
+    - name: Install Chrome driver
+      run: |
+        LATEST_VERSION=$(curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+        curl -sSL https://chromedriver.storage.googleapis.com/$LATEST_VERSION/chromedriver_linux64.zip -o /tmp/chromedriver.zip
+        sudo unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+
+    - name: Install dependencies
+      run: mvn -B clean dependency:resolve
+
+    - name: Run Copilot review
+      uses: Open-At-Source/copilot-action@v1.0.0
+      with:
+        language: java
+        token: ${{ secrets.GITHUB_TOKEN }}
+        ignore-patterns: |
+          **/target/**
+          **/build/**
+
+    - name: Run Selenium tests
+      run: mvn -B test -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
