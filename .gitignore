@@ -1,1 +1,12 @@
-.idea
+.idea/
+*.iml
+*.ipr
+*.iws
+target/
+bin/
+/lib
+*.jar
+test-output/
+drivers/
+config/
+*.properties
