@@ -1,35 +1,34 @@
-name: Java Code Review
+name: CI
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  copilot-review:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup JDK
-      uses: actions/setup-java@v2
-      with:
-        java-version: 11
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
 
-    - name: Setup Maven
-      uses: v1sion/setup-maven@v1
-      with:
-        maven-version: '3.8.1'
+      - name: Build with Maven
+        run: mvn clean test
 
-    - name: Install GitHub Copilot
-      uses: Open-At-Source/copilot-action@v1.0.0
-      with:
-        language: java
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check Test Results
+        run: mvn surefire-report:report
 
-    - name: Review Java code
-      run: |
-        git fetch origin pull/${{ github.event.pull_request.number }}/head:${{ github.event.pull_request.head.ref }}
-        git checkout ${{ github.event.pull_request.head.ref }}
-        git config --global user.email "bot@example.com"
-        git config --global user.name "GitHub Copilot"
-        copilot review --ignore-patterns "**/target/**,**/build/**"
+      - name: Merge Pull Request
+        if: github.event_name == 'pull_request' && success()
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          method: merge
+          merge_method: squash
+          branch: main
