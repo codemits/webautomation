@@ -1,4 +1,4 @@
-package org.web.extentreportlistener;
+package org.euro.extentreportlistener;
 
 import java.io.File;
 import java.util.Calendar;

@@ -54,25 +54,5 @@
             <artifactId>extentreports</artifactId>
             <version>2.41.2</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>ru.sbtqa</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>2.2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>cz.cvut.fel.still</groupId>
-            <artifactId>selenium-starter-kit</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.testsmith</groupId>
-            <artifactId>webdriver-testng-archetype</artifactId>
-            <version>1.4.4</version>
-        </dependency>
     </dependencies>
 </project>

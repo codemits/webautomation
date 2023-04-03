@@ -1,6 +1,6 @@
-package org.web.utils;
+package org.euro.utils;
 
-import org.web.base.TestBase;
+import org.euro.base.TestBase;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 
 public class TestUtil extends TestBase {
     public static long PAGE_LOAD_TIMEOUT = 90;
@@ -23,14 +22,12 @@ public class TestUtil extends TestBase {
                         + ".jpg"));
     }
 
-    public static boolean isDisplayedForElement(WebDriver driver, WebElement element, long timeoutInSeconds) {
-        try {
-            return new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.visibilityOf(element))
-                    .isDisplayed();
-        } catch (TimeoutException e) {
-            return false;
-        }
+    public static boolean isDisplayedForElement(WebDriver driver,
+                                                WebElement element, long timeout) {
+        new WebDriverWait(driver, timeout).
+                until(ExpectedConditions.visibilityOf(element));
+        return element.isDisplayed();
     }
+
+
 }

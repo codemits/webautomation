@@ -1,7 +1,7 @@
-package org.web.pages;
+package org.euro.pages;
 
-import org.web.base.TestBase;
-import org.web.utils.TestUtil;
+import org.euro.base.TestBase;
+import org.euro.utils.TestUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
