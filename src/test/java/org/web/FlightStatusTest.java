@@ -1,7 +1,7 @@
-package org.euro;
+package org.web;
 
-import org.euro.base.TestBase;
-import org.euro.pages.FlightStatus;
+import org.web.base.TestBase;
+import org.web.pages.FlightStatus;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

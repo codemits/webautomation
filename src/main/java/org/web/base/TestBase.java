@@ -1,7 +1,7 @@
-package org.euro.base;
+package org.web.base;
 
-import org.euro.utils.TestUtil;
-import org.euro.utils.WebEventListener;
+import org.web.utils.TestUtil;
+import org.web.utils.WebEventListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

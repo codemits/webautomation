@@ -1,6 +1,6 @@
-package org.euro.utils;
+package org.web.utils;
 
-/*************************************** PURPOSE **********************************
+/********************************** PURPOSE **********************************
  - This class implements the WebDriverEventListener, which is included under events.
  The purpose of implementing this interface is to override all the methods and define certain useful  Log statements
  which would be displayed/logged as the application under test is being run.
@@ -8,7 +8,7 @@ package org.euro.utils;
  as an when the action done (click, findBy etc).
  */
 
-import org.euro.base.TestBase;
+import org.web.base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
