@@ -17,7 +17,3 @@ test-output/
 
 # Browser drivers
 drivers/
-
-# Configuration files
-config/
-*.properties
