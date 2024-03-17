@@ -20,7 +20,7 @@ public class FlightStatusTest extends TestBase {
         initialization();
         flightStatus = new FlightStatus();
         flightStatus.acceptCookie();
-        percy = new Percy(driver);
+        chome = new chrome(driver);
     }
 
     @Test
